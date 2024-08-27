@@ -1,0 +1,44 @@
+<script>
+    const express = require('express');
+const ejs = require('ejs');
+const path = require('path'); // Required for path manipulation
+
+const app = express();
+const port = 3000;
+
+// Configure EJS and views directory
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views')); // Adjust if views are elsewhere
+
+app.get('/', async (req, res) => {
+  try {
+    const accessToken = 'qrmwxqaNcc9EJ33PITfRszG9KsgGBrnD'; // Replace with your actual access token (remove pipe symbol if not required)
+
+    // Consider using a server-side proxy for a robust solution
+    const response = await fetch('https://api.mercadolibre.com/sites/MLA/search?q=Bateria+Motoneta+Ytx6l-bs+Winmex+FT125+Cg125+125z+Dt125+Rm');
+
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const items = data.results;
+
+
+    // Print the API response to console
+    console.log('API response:', data);
+
+    // Render the index template with fetched data
+    res.render('index', { items });
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    res.status(500).send('Error fetching data'); // Handle errors gracefully
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
+
+
+</script>
