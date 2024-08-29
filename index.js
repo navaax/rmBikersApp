@@ -1,39 +1,35 @@
-const https = require('https');
 
-// Access token, user ID, and application ID (replace with your values)
-const accessToken = 'wfxo5pOEUnab4Co0tyz9JMKQlZwPlVua';
-const appId = '1529010052401438';  // Replace with your Mercado Libre application ID
+import getAuthFromMercadoApi from './Path_Control/autenticacionApi/Auth/autenToken.js';
+import getSellerData from './Path_Control/autenticacionApi/articulos/preguntas/getSeller.js';
+import getItems from './Path_Control/autenticacionApi/articulos/preguntas/getPreguntas.js';
 
-// API endpoint (adjust as needed)
-const apiEndpoint = `/users/me`;
+//https://auth.mercadolibre.com.mx/authorization?response_type=code&client_id=1529010052401438&redirect_uri=https://localhost:8080
 
-const options = {
-  hostname: 'api.mercadolibre.com',
-  path: apiEndpoint,
-  method: 'GET',
-  headers: {
-    Authorization: `Bearer ${accessToken}`,
-    'X-Application-Id': appId
-  }
+const clientSecret = 'wfxo5pOEUnab4Co0tyz9JMKQlZwPlVua';
+const appId = '1529010052401438';
+const redirectUri = 'https://localhost:8080';
+const authorizationCode = 'TG-66d0a73fc975520001e44d1c-635799575'; 
+
+const questionData = {
+  questionId: 123456, 
+  answerText: 'Agrdecemos el contacto, el articulo ${nombreArticulo} es de color ${colorArticulo}!', 
 };
 
-https.request(options, (res) => {
-  let data = '';
+async function main() {
+  try {
+    const redirectUrl = await getAuthFromMercadoApi(appId, clientSecret, redirectUri, authorizationCode);
+    console.log(redirectUri);
 
-  res.on('data', (chunk) => {
-    data += chunk;
-  });
+    // Assuming getSellerData is asynchronous
+    const sellerData = await getSellerData();
+    console.log(sellerData); // Or use data as needed
 
-  res.on('end', () => {
-    try {
-      const parsedData = JSON.parse(data);
-      console.log('Response data:', parsedData);
-    } catch (error) {
-      console.error('Error parsing response:', error);
-    }
-  });
-})
-.on('error', (error) => {
-  console.error('Error making request:', error);
-})
-.end();
+    // Assuming getPreguntas is asynchronous
+    // const preguntasData = await getItems();
+    // console.log(preguntasData); // Access questions data here
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+main();
