@@ -8,7 +8,7 @@ import getItems from './Path_Control/autenticacionApi/articulos/preguntas/getPre
 const clientSecret = 'wfxo5pOEUnab4Co0tyz9JMKQlZwPlVua';
 const appId = '1529010052401438';
 const redirectUri = 'https://localhost:8080';
-const authorizationCode = 'TG-66d0a73fc975520001e44d1c-635799575'; 
+const authorizationCode = 'TG-66d137c611d7f5000108d5df-635799575'; 
 
 const questionData = {
   questionId: 123456, 

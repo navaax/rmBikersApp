@@ -11,7 +11,7 @@ async function obtenerAccessToken() {
 function leerPrimerTitulo(filePath) {
     try {
         const workbook = XLSX.readFile(filePath);
-        const sheetName = workbook.SheetNames[1]; // Lee la primera hoja
+        const sheetName = workbook.SheetNames[0]; // Lee la primera hoja
         const sheet = workbook.Sheets[sheetName];
         const data = XLSX.utils.sheet_to_json(sheet);
 
