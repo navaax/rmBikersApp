@@ -1,4 +1,4 @@
-const getAuthTokken = require('../../Auth/autenToken');
+const getAuthTokken = require('../control/Path_Control/autenticacionApi/Auth/autenToken');
 
 const tokenData = await getAuthTokken();
 console.log('Token extraído:', tokenData);

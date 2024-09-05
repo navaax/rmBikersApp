@@ -1,7 +1,7 @@
 
-import getAuthFromMercadoApi from './Path_Control/autenticacionApi/Auth/autenToken.js';
-import getSellerData from './Path_Control/autenticacionApi/articulos/preguntas/getSeller.js';
-import getItems from './Path_Control/autenticacionApi/articulos/preguntas/getPreguntas.js';
+import getAuthFromMercadoApi from './control/Path_Control/autenticacionApi/Auth/autenToken.js';
+import getSellerData from './control/Path_Control/autenticacionApi/articulos/preguntas/getSeller.js';
+// import getItems from './Path_Control/autenticacionApi/articulos/preguntas/getPreguntas.js';
 
 //https://auth.mercadolibre.com.mx/authorization?response_type=code&client_id=1529010052401438&redirect_uri=https://localhost:8080
 
