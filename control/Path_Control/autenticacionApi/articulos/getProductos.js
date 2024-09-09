@@ -1,11 +1,12 @@
 import axios from 'axios';
 import getEndPointData from '../../../../model/mercadoLibreEndPointProduct.js';
-const access_token = 'APP_USR-1529010052401438-090418-49bbc09fcad2c5811442a29eac398540-635799575';
+const access_token = 'APP_USR-889807737673414-090913-d6d9bb5e227a5599156094a5a4fb55b5-420711769';
 
 async function getArticulosFromUserId() {
     try {
+        //https://api.mercadolibre.com/sites/$SITE_ID/search?seller_id=420711769
         // URL de la API
-        let url = `https://api.mercadolibre.com/users/635799575/items/search`;
+        let url = `https://api.mercadolibre.com/sites/MLM/search?seller_id=420711769`;
         
         // Obtener datos del endpoint
         const response = await getEndPointData(url);
@@ -21,17 +22,17 @@ async function getArticulosFromUserId() {
         // Map de las solicitudes para obtener atributos de artículos
         const detailedRequests = resultados.map(async (itemId) => {
           //https://api.mercadolibre.com/items/${itemId}?attributes=id,title,category_id,price,base_price,initial_quantity,available_quantity,health,shipping,listing_type_id,descriptions,variations,condition,pictures,video_id,expiration_time,attributes&id=MAX_WEIGHT_LOAD,BRAND,value_name&id=MAX_SPEED,MODEL,value_name`,
-          const url = `https://api.mercadolibre.com/items/${itemId}?attributes=id,title,category_id,price,base_price,initial_quantity,available_quantity,health,shipping,listing_type_id,descriptions,variations,condition,pictures,video_id,expiration_time,attributes&id=MAX_WEIGHT_LOAD,BRAND,value_name&id=MAX_SPEED,MODEL,value_name`;
+          const url = `https://api.mercadolibre.com/items/${itemId.id}?attributes=id,title,category_id,price,base_price,initial_quantity,available_quantity,health,shipping,listing_type_id,descriptions,variations,condition,pictures,video_id,expiration_time,attributes&id=MAX_WEIGHT_LOAD,BRAND,value_name&id=MAX_SPEED,MODEL,value_name`;
                           
             try {
                 
               const itemDetails = await getEndPointData(url);
-              const calidadCompraData = await getCalidadCompra(itemId);
-                // Si 'itemDetails' no es el formato esperado, asegúrate de manejarlo adecuadamente
+              const calidadCompraData = await getCalidadCompra(itemId.id);
+                
                 if (!itemDetails || typeof itemDetails !== 'object') {
                     throw new Error('La respuesta de la API para el artículo no es válida.');
                 }
-                console.log(itemDetails);
+                
                 
 
                 return {
@@ -101,7 +102,7 @@ async function getCalidadCompra(id) {
 
 // Llamada principal
 getArticulosFromUserId().then(results => {
-    console.log("Resultados combinados:", results);
+    return results;
 });
 
 export default getArticulosFromUserId;

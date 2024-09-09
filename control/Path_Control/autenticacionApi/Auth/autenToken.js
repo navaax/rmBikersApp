@@ -3,34 +3,6 @@ import qs from 'qs';
 import fs from 'fs/promises';
 import saveFirstDataTokken from '../metadata/save.js'; // Función para guardar datos del token
 
-// Función para obtener un nuevo token desde la API de Mercado Libre
-async function fetchToken(appId, clientSecret, redirectUri, authorizationCode) {
-  const data = qs.stringify({
-    'grant_type': 'authorization_code',
-    'client_id': appId,
-    'client_secret': clientSecret,
-    'code': authorizationCode,
-    'redirect_uri': redirectUri
-  });
-
-  const config = {
-    method: 'post',
-    url: 'https://api.mercadolibre.com/oauth/token',
-    headers: {
-      'accept': 'application/json',
-      'content-type': 'application/x-www-form-urlencoded'
-    },
-    data
-  };
-
-  try {
-    const response = await axios.request(config);
-    return response.data; // Retorna los datos del token
-  } catch (error) {
-    console.error('Error al obtener el token:', error);
-    throw error; // Vuelve a lanzar el error para manejarlo en la llamada
-  }
-}
 
 // Función para obtener la autorización desde la API de Mercado Libre
 async function getAuthFromMercadoApi(appId, clientSecret, redirectUri, authorizationCode) {
