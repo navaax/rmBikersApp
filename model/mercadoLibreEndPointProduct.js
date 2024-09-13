@@ -5,7 +5,7 @@ import getAuthFromMercadoApi from '../control/Path_Control/autenticacionApi/Auth
 
 async function getEndPointData(url) {
     //const tokenData = await getAuthFromMercadoApi();  // Obtén el token de autenticación
-    const accessToken = 'APP_USR-889807737673414-090913-d6d9bb5e227a5599156094a5a4fb55b5-420711769';
+    const accessToken = 'APP_USR-889807737673414-091311-9290b981a01db5899a43a745740b80ad-420711769';
 
     const config = {
         method: 'get',

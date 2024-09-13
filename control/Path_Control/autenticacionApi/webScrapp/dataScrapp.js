@@ -6,16 +6,13 @@ import getArticulosFromUserId from '../../autenticacionApi/articulos/getProducto
 import * as cheerio from 'cheerio';
 
 let access_token = 'APP_USR-889807737673414-090913-d6d9bb5e227a5599156094a5a4fb55b5-420711769';
-const sellerIdsToFilter = [1107927983, 1111427732, 147712068, 1295123986, 132947885,188528201, 225306136, 678107898, 1651870819, 121996258, 1214768485, 1694176395, 1568479543, 1287189487, 339071922, 5742139330, 96659371, 171629865];
+const sellerIdsToFilter = [1107927983, 1111427732, 147712068, 1295123986, 132947885, 188528201, 225306136, 678107898, 1651870819, 121996258, 1214768485, 1694176395, 1568479543, 1287189487, 339071922, 5742139330, 96659371, 171629865];
 
 
 //Parametros a evaluar, los datos para ventas.
 //Porcentaje de precios mas altos, 30%. Se tiene que ver o monitoriar en caso de que baje de precio
 
-const metricPorcentaje = .35;
-const topVentas = 0;
 
-//
 
 
 const listadoDeProductos = async () => {
@@ -37,7 +34,7 @@ async function buscarProductosApi(producto, accessToken) {
     producto.Titulo
   )}&attributes=id,price,category_id,title,seller,available_quantity&category_id=${
     producto.CategoriaID
-  }&limit=50`;
+  }&limit=10`;
   console.log(url);
 
   try {
@@ -67,7 +64,7 @@ async function obtenerPreguntasProducto(itemId, productoIdPropio, accessToken) {
 
     console.log('Resultados de preguntas de la API:', response.data);
 
-    // Extraer las preguntas con el id del producto relacionado y el id del producto de la API
+    
     const preguntas = response.data.questions.map(question => ({
       idProductoPropio: productoIdPropio,
       idProductoDelCompetidor: itemId,

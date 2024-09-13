@@ -1,11 +1,10 @@
-import  mysql from 'mysql';
+import  mysql2 from 'mysql2';
 
-const connection = mysql.createConnection({
-  host: '192.168',
-  port: 3306,
-  user: 'remote',
-  password: '1234',
-  database: 'tablas'
+const connection = mysql2.createConnection({
+  host: 'localhost',
+  user: 'RMB_NAVA',
+  password: 'RMBIKERS-NAVAX24',
+  database: 'rmbikers_2019'
 });
 
 connection.connect((err) => {
@@ -15,3 +14,6 @@ connection.connect((err) => {
   }
   console.log('Conexión exitosa');
 });
+
+
+export default connection;

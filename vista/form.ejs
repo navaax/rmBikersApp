@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+</head>
+<body>
+    <h1>Columnas de la tabla</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Campo</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (columns && columns.length > 0) { %>
+                <% columns.forEach(column => { %>
+                    <tr>
+                        <td><%= column.Field %></td>
+                        <td><%= column.Type %></td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="2">No se encontraron columnas.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</body>
+</html>
